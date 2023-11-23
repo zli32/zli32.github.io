@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Design Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Zekun Li">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<nav class="navbar sticky-top navbar-expand-md bg-body-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Design Portfolio</a>
+        <div class="collapse navbar-collapse" id="navbar-toggle">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#hytech">HyTech Racing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#chatpcb">ChatPCB</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#airplanes">AIRplanes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#airplanes">Resume</a>
+                </li>
+            </ul>
+        </div>
+        <span class="navbar-text fw-medium">
+            Zekun Li
+        </span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle"
+            aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<body>
+    <div class="container-lg pt-4">
+        <div id="introduction">
+            <p class="text-center">I'm Zekun Li, a fourth-year computer engineering student at Georgia Tech. This
+                portfolio showcases the projects I've contributed to significantly during my time as an undergraduate.
+                For work and research experience, please reference the resume available for download above.
+            </p>
+        </div>
+        <hr>
+        <div id="hytech">
+            <h1 class="text-center">HyTech Racing</h1>
+            <h3 class="text-center">Formula SAE Electric Competition Team</h3>
+            <div><span class="fw-bold">Role: </span><span>Electrical Lead</span></div>
+            <div><span class="fw-bold">Results: </span><span>3rd overall, 3rd in acceleration, 3rd in skidpad, 4th in
+                    design, and 2nd in cost</span></div>
+            <div><span class="fw-bold">Dates: </span><span>June 2022 to July 2023</div>
+                <br>
+                <div><span class="h5">Synopsis</span></div>
+                <p class="mt-1"><a href="https://hytechracing.gatech.edu/">HyTech Racing</a> is Georgia Tech's <a
+                        href="https://www.sae.org/attend/student-events/formula-sae-electric/">Formula SAE Electric</a>
+                    competition team. The annual competition challenges teams to design and build a fully electric
+                    single-seat race car and race against more than fifty other teams. As electrical lead, I led the
+                    electrical team
+                    in the overall design and validation of the electrical
+                    systems of the vehicle.</p>
+                <div><span class="h5">Battery Management System (BMS)</span></div>
+                <div><span class="fw-bold">Source code: </span><a
+                        href="https://github.com/hytech-racing/code-2022/blob/main/Vehicle/AMS_Control_Unit/AMS_Control_Unit.ino">Driver</a><span>&nbsp;</span><a
+                        href="https://github.com/hytech-racing/code-2022/tree/main/Libraries/LTC6811_2">Backend
+                        Library</a>
+                </div>
+                <p class="mt-1 mb-0">I architected the clean-sheet redesign of the BMS embedded software. The software
+                    has
+                    several main functions:</p>
+                <ul>
+                    <li>Issue commands to the battery stack monitor chips</li>
+                    <li>Read and buffer data from the battery stack monitor chips</li>
+                    <li>Process data and perform safety checks</li>
+                    <li>Immediately disconnect the high voltage battery from the motor in the event of a safety
+                        violation
+                    </li>
+                    <li>Balance the battery cells when charging</li>
+                    <li>Send data to data logging unit via CAN bus</li>
+                </ul>
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="w-50">Issues with Old Program</th>
+                            <th class="w-50">Solutions in New Program</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td>Relied on shoddy, outdated manufacturer code which was difficult to extend and maintain.
+                            </td>
+                            <td>Use custom object-oriented paradigm to represent and control each individual battery
+                                stack
+                                monitor.</td>
+                        </tr>
+                        <tr>
+                            <td>Timed battery monitor communications with waits up to two seconds long, effectively
+                                freezing
+                                the microcontroller for that duration.</td>
+                            <td>Times battery communications with a state machine within the control loop, eliminating
+                                waits
+                                altogether.</td>
+                        </tr>
+                        <tr>
+                            <td>No mechanism to detect microcontroller freezes.</td>
+                            <td>Interrupt to toggle watchdog timer that disconnects high voltage battery if
+                                microcontroller
+                                freezes.</td>
+                        </tr>
+                        <tr>
+                            <td>Used third-party SPI communication library, which could not guarantee compatiblity with
+                                all
+                                Arduino-ecosystem devices.</td>
+                            <td>Uses standard Arduino SPI communication library. Compatible with all Arduino-ecosystem
+                                devices.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <span class="h5">Circuit Design and Validation</span>
+                <div><span class="fw-bold">Hardware Designs (AutoDesk EAGLE): </span><a
+                        href="https://github.com/hytech-racing/circuits-2022/tree/main/">All
+                        Boards</a></div>
+                <p class="mt-1 mb-0">The team designs and validates all circuit boards in house, barring a few that
+                    competition
+                    rules require be purchased from vendors. During my year as lead, we introduced several new circuit
+                    boards and revised all the rest.</p>
+                <p class="mt-1">I assisted the electrical subteam leads in the design of the boards they were
+                    responsible for. I played a primary role in the validation of the accumulator management unit (ACU)
+                    and
+                    tractive system board (TSB), the two boards that control and monitor the battery. Our improvements
+                    enabled our maximum pack voltage to increase from 300V to 350V, enhanced driver awareness of vehicle
+                    state, and increased the collection of data.</p>
+                <span class="h5">Circuit Design and Validation</span>
+                <div><span class="fw-bold">Software: </span><a
+                        href="https://github.com/hytech-racing/code-2022/tree/main">All
+                        Software</a></div>
+                <p class="mt-1 mb-0">The team creates custom software to run with our circuitry, interact with third
+                    party
+                    devices such as the motor controller, and collect data. Beyond the BMS software, I entrusted my
+                    teammates to build out the rest of the software systems, assisting and validating as necessary.</p>
+            </div>
+            <hr>
+            <div id="Chatpcb">
+                <h1 class="text-center">ChatPCB</h1>
+                <h3 class="text-center">ImmerseGT XR Hackathon</h3>
+            </div>
+            <hr>
+            <div id="airplanes">
+                <h1 class="text-center">AIRplanes</h1>
+                <h3 class="text-center">Senior Design Project</h3>
+            </div>
+        </div>
+</body>
+
+</html>
