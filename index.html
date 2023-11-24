@@ -24,10 +24,10 @@
                     <a class="nav-link" href="#hytech">HyTech Racing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#chatpcb">ChatPCB</a>
+                    <a class="nav-link" href="#airplanes">AIRplanes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#airplanes">AIRplanes</a>
+                    <a class="nav-link" href="#chatpcb">ChatPCB</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#airplanes">Resume</a>
@@ -56,111 +56,297 @@
         <div id="hytech">
             <h1 class="text-center">HyTech Racing</h1>
             <h3 class="text-center">Formula SAE Electric Competition Team</h3>
-            <div><span class="fw-bold">Role: </span><span>Electrical Lead</span></div>
-            <div><span class="fw-bold">Results: </span><span>3rd overall, 3rd in acceleration, 3rd in skidpad, 4th in
-                    design, and 2nd in cost</span></div>
-            <div><span class="fw-bold">Dates: </span><span>June 2022 to July 2023</div>
-                <br>
-                <div><span class="h5">Synopsis</span></div>
-                <p class="mt-1"><a href="https://hytechracing.gatech.edu/">HyTech Racing</a> is Georgia Tech's <a
-                        href="https://www.sae.org/attend/student-events/formula-sae-electric/">Formula SAE Electric</a>
-                    competition team. The annual competition challenges teams to design and build a fully electric
-                    single-seat race car and race against more than fifty other teams. As electrical lead, I led the
-                    electrical team
-                    in the overall design and validation of the electrical
-                    systems of the vehicle.</p>
-                <div><span class="h5">Battery Management System (BMS)</span></div>
-                <div><span class="fw-bold">Source code: </span><a
-                        href="https://github.com/hytech-racing/code-2022/blob/main/Vehicle/AMS_Control_Unit/AMS_Control_Unit.ino">Driver</a><span>&nbsp;</span><a
-                        href="https://github.com/hytech-racing/code-2022/tree/main/Libraries/LTC6811_2">Backend
-                        Library</a>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div><span class="fw-bold">Role: </span><span>Electrical Lead</span></div>
+                    <div><span class="fw-bold">Results: </span><span>3rd overall, 3rd in acceleration, 3rd in skidpad,
+                            4th in
+                            design, and 2nd in cost</span></div>
+                    <div><span class="fw-bold">Dates: </span><span>June 2021 to July 2022</div>
+                    <br>
+                    <div><span class="h5">Synopsis</span></div>
+                    <p class="mt-1"><a href="https://hytechracing.gatech.edu/" target="_blank">HyTech Racing</a> is
+                        Georgia Tech's <a href="https://www.sae.org/attend/student-events/formula-sae-electric/"
+                            target="_blank">Formula SAE
+                            Electric</a>
+                        competition team. The annual competition challenges teams to design and build a fully electric
+                        single-seat race car and race against more than fifty other teams. As electrical lead for HT06,
+                        the car for the 2021-2022 competition year, I led the
+                        electrical team in the overall design and validation of the electrical
+                        systems of the vehicle.</p>
+                    <div><span class="h5">Battery Management System (BMS)</span></div>
+                    <div><span class="fw-bold">Source code: </span><a
+                            href="https://github.com/hytech-racing/code-2022/blob/main/Vehicle/AMS_Control_Unit/AMS_Control_Unit.ino"
+                            target="_blank">Driver</a><span>&nbsp;</span><a
+                            href="https://github.com/hytech-racing/code-2022/tree/main/Libraries/LTC6811_2"
+                            target="_blank">Backend
+                            Library</a>
+                    </div>
+                    <p class="mt-1 mb-0">I architected the clean-sheet redesign of the BMS embedded software. The
+                        software
+                        has
+                        several main functions:</p>
+                    <ul>
+                        <li>Issue commands to the battery stack monitor chips</li>
+                        <li>Read and buffer data from the battery stack monitor chips</li>
+                        <li>Process data and perform safety checks</li>
+                        <li>Immediately disconnect the high voltage battery from the motor in the event of a safety
+                            violation
+                        </li>
+                        <li>Balance the battery cells when charging</li>
+                        <li>Send data to data logging unit via CAN bus</li>
+                    </ul>
                 </div>
-                <p class="mt-1 mb-0">I architected the clean-sheet redesign of the BMS embedded software. The software
-                    has
-                    several main functions:</p>
-                <ul>
-                    <li>Issue commands to the battery stack monitor chips</li>
-                    <li>Read and buffer data from the battery stack monitor chips</li>
-                    <li>Process data and perform safety checks</li>
-                    <li>Immediately disconnect the high voltage battery from the motor in the event of a safety
-                        violation
-                    </li>
-                    <li>Balance the battery cells when charging</li>
-                    <li>Send data to data logging unit via CAN bus</li>
-                </ul>
-                <table class="table">
-                    <thead>
-                        <tr class="text-center">
-                            <th class="w-50">Issues with Old Program</th>
-                            <th class="w-50">Solutions in New Program</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <tr>
-                            <td>Relied on shoddy, outdated manufacturer code which was difficult to extend and maintain.
-                            </td>
-                            <td>Use custom object-oriented paradigm to represent and control each individual battery
-                                stack
-                                monitor.</td>
-                        </tr>
-                        <tr>
-                            <td>Timed battery monitor communications with waits up to two seconds long, effectively
-                                freezing
-                                the microcontroller for that duration.</td>
-                            <td>Times battery communications with a state machine within the control loop, eliminating
-                                waits
-                                altogether.</td>
-                        </tr>
-                        <tr>
-                            <td>No mechanism to detect microcontroller freezes.</td>
-                            <td>Interrupt to toggle watchdog timer that disconnects high voltage battery if
-                                microcontroller
-                                freezes.</td>
-                        </tr>
-                        <tr>
-                            <td>Used third-party SPI communication library, which could not guarantee compatiblity with
-                                all
-                                Arduino-ecosystem devices.</td>
-                            <td>Uses standard Arduino SPI communication library. Compatible with all Arduino-ecosystem
-                                devices.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <span class="h5">Circuit Design and Validation</span>
-                <div><span class="fw-bold">Hardware Designs (AutoDesk EAGLE): </span><a
-                        href="https://github.com/hytech-racing/circuits-2022/tree/main/">All
-                        Boards</a></div>
-                <p class="mt-1 mb-0">The team designs and validates all circuit boards in house, barring a few that
-                    competition
-                    rules require be purchased from vendors. During my year as lead, we introduced several new circuit
-                    boards and revised all the rest.</p>
-                <p class="mt-1">I assisted the electrical subteam leads in the design of the boards they were
-                    responsible for. I played a primary role in the validation of the accumulator management unit (ACU)
-                    and
-                    tractive system board (TSB), the two boards that control and monitor the battery. Our improvements
-                    enabled our maximum pack voltage to increase from 300V to 350V, enhanced driver awareness of vehicle
-                    state, and increased the collection of data.</p>
-                <span class="h5">Circuit Design and Validation</span>
-                <div><span class="fw-bold">Software: </span><a
-                        href="https://github.com/hytech-racing/code-2022/tree/main">All
-                        Software</a></div>
-                <p class="mt-1 mb-0">The team creates custom software to run with our circuitry, interact with third
-                    party
-                    devices such as the motor controller, and collect data. Beyond the BMS software, I entrusted my
-                    teammates to build out the rest of the software systems, assisting and validating as necessary.</p>
+                <div class="col-lg-5">
+                    <div class="h-100 d-flex align-items-center">
+                        <div class="carousel slide" id="hytech-carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#hytech-carousel" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#hytech-carousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#hytech-carousel" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#hytech-carousel" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="./images/hytech/car-with-trophy-min.jpg" class="d-block w-100"
+                                        alt="FSAE car with trophies">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>HT06</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./images/hytech/ht06-self-min.JPG" class="d-block w-100"
+                                        alt="Students standing next to FSAE car">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>Programming the motor controller.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./images/hytech/hv-stack-min.jpg" class="d-block w-100"
+                                        alt="Stacked circuit boards">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>High voltage control circuitry.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./images/hytech/main-ecu-min.jpg" class="d-block w-100"
+                                        alt="Circuit board in box">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>Main control unit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#hytech-carousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#hytech-carousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr>
-            <div id="Chatpcb">
-                <h1 class="text-center">ChatPCB</h1>
-                <h3 class="text-center">ImmerseGT XR Hackathon</h3>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th class="w-50">Issues with Old Program</th>
+                        <th class="w-50">Solutions in New Program</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <td>Relied on outdated manufacturer code which was difficult to extend and maintain.
+                        </td>
+                        <td>Use custom object-oriented paradigm to represent and control each individual battery
+                            stack
+                            monitor.</td>
+                    </tr>
+                    <tr>
+                        <td>Timed battery monitor communications with waits up to two seconds long, effectively
+                            freezing
+                            the microcontroller for that duration.</td>
+                        <td>Times battery communications with a state machine within the control loop, eliminating
+                            waits
+                            altogether.</td>
+                    </tr>
+                    <tr>
+                        <td>No mechanism to detect microcontroller freezes.</td>
+                        <td>Interrupt to toggle watchdog timer that disconnects high voltage battery if
+                            microcontroller
+                            freezes.</td>
+                    </tr>
+                    <tr>
+                        <td>Used third-party SPI communication library, which could not guarantee compatiblity with
+                            all
+                            Arduino-ecosystem devices.</td>
+                        <td>Uses standard Arduino SPI communication library. Compatible with all Arduino-ecosystem
+                            devices.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <span class="h5">Circuit Design and Validation</span>
+            <div><span class="fw-bold">Hardware Designs: </span><a
+                    href="https://github.com/hytech-racing/circuits-2022/tree/main/" target="_blank">Board Files
+                    (AutoDesk EAGLE)</a><span>&nbsp;</span><a href="./documents/ht06_pcb_designs.pdf"
+                    target="_blank">Design Binder (PDF)</a></div>
+            <p class="mt-1 mb-0">The team designs and validates all circuit boards in house, barring a few that
+                competition
+                rules require be purchased from vendors. During my year as lead, we introduced several new circuit
+                boards and revised all the rest.</p>
+            <p class="mt-1">I assisted the electrical subteam leads in the design of the boards they were
+                responsible for. I played a primary role in the validation of the accumulator management unit (ACU)
+                and
+                tractive system board (TSB), the two boards that control and monitor the battery. Our improvements
+                enabled our maximum pack voltage to increase from 300V to 350V, enhanced driver awareness of vehicle
+                state, and increased the collection of data.</p>
+            <span class="h5">Circuit Design and Validation</span>
+            <div><span class="fw-bold">Software: </span><a href="https://github.com/hytech-racing/code-2022/tree/main"
+                    target="_blank">Github Repository</a></div>
+            <p class="mt-1">The team creates custom software to run with our circuitry, interact with third
+                party
+                devices such as the motor controller, and collect data. As I developed the BMS software, my
+                teammates worked in conjunction to build out the rest of the software systems, assisting and validating
+                as necessary.</p>
+        </div>
+        <hr>
+        <div id="chatpcb">
+            <h1 class="text-center">ChatPCB</h1>
+            <h3 class="text-center">ImmerseGT XR Hackathon</h3>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div><span class="fw-bold">Role: </span><span>Team Member</span></div>
+                    <div><span class="fw-bold">Results: </span><span>Winner, Next-Gen XR Apps - Best Commercial
+                            Use</span></div>
+                    <div><span class="fw-bold">Dates: </span><span>April 2023</div>
+                    <br>
+                    <div><span class="h5">Synopsis</span></div>
+                    <p class="mt-1"><a href="https://devpost.com/software/chatpcb" target="_blank">ChatPCB</a> was my
+                        team's submission to the 2023 <a href="https://www.immersegt.io/" target="_blank">ImmerseGT
+                            Hackathon</a>. The hackathon challenges participants to build novel virtual
+                        and augmented reality software within a 36-hour time limit.</p>
+                    <div><span class="h5">Motivation</span></div>
+                    <p class="mt-1 mb-0">To hand-solder parts onto a printed circuit board (PCB), one must look up the
+                        part number in
+                        a table or database, find the part by part number from their parts bin, and find the location
+                        for
+                        the part on the board by searching for the reference designator in the CAD program.</p>
+                    <p class="mt-1">The process is tedious and requires several context switches, resulting in high
+                        work times,
+                        fatigue, and mistakes.</p>
+                </div>
+                <div class="col-lg-5">
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <div class="carousel slide" id="chatpcb-carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#chatpcb-carousel" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#chatpcb-carousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="./images/chatpcb/chatpcb-screenshots-min.png" class="d-block w-100" alt="">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="./images/chatpcb/chatpcb-team-min.png" class="d-block w-100" alt="">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#chatpcb-carousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#chatpcb-carousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr>
-            <div id="airplanes">
-                <h1 class="text-center">AIRplanes</h1>
-                <h3 class="text-center">Senior Design Project</h3>
+            <div><span class="h5">Our Application</span></div>
+            <div><span class="fw-bold">Software: </span><a href="https://github.com/zli32/gtxr-hackathon-team-17"
+                target="_blank">Github Repository</a></div>
+            <p class="mt-1 mb-0">We developed an Android application that tracks a PCB through the camera
+                viewfinder. The app listens for the user to read off a reference designator on the PCB. It marks the
+                location of the spoken designator with a virtual marker and displays the relevant part number and
+                type.</p>
+            <p class="mt-1 mb-0 fw-bold">
+                Benefits:
+            </p>
+            <ul>
+                <li>Find the part location and part number in one software with one spoken command.</li>
+                <li>Visual marker remembers part location for you as you search parts bin. No need to search for
+                    location after part is found.</li>
+                <li>Visual marker is tolerant to movement: as long as the PCB is in frame, the marker moves along with
+                    the PCB.</li>
+                <li>Integrates seamlessly with AutoDesk EAGLE CAD software.</li>
+            </ul>
+            <p class="mt-1 mb-0"><span class="fw-bold">PCB Tracking: </span>The app utilizes <a
+                    href="https://developers.google.com/ar/develop/augmented-images" target="_blank">ARCore
+                    Augmented Images</a> to track the PCB. A reference image of the PCB is required, which is obtained
+                with the reference image AutoDesk EAGLE generates automatically.</p>
+            <p class="mt-1 mb-0"><span class="fw-bold">Parts Information: </span>Parts information is obtained by parsing the bill of materials generated by AutoDesk EAGLE.</p>
+            <p class="mt-1"><span class="fw-bold">Voice Recognition: </span>Voice recognition of reference designators is implemented using the <a href = "https://developer.android.com/reference/android/speech/SpeechRecognizer" target="_blank">SpeechRecognizer API.</a></p>
+        </div>
+        <hr>
+        <div id="airplanes">
+            <h1 class="text-center">AIRplanes</h1>
+            <h3 class="text-center">Senior Design Project</h3>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div><span class="fw-bold">Role: </span><span>Team Lead</span></div>
+                    <div><span class="fw-bold">Results: </span><span>In Progress</span></div>
+                    <div><span class="fw-bold">Dates: </span><span>August 2023 to Present</div>
+                    <br>
+                    <div><span class="h5">Synopsis</span></div>
+                    <p class="mt-1"></p>
+                </div>
+                <div class="col-lg-5">
+                    <div class="h-100 d-flex align-items-center">
+                        <div class="carousel slide" id="airplanes-carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#airplanes-carousel" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#airplanes-carousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#airplanes-carousel" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#airplanes-carousel" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="" class="d-block w-100" alt="">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#airplanes-carousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#airplanes-carousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <hr>
+    </div>
 </body>
 
 </html>
